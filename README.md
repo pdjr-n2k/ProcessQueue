@@ -1,4 +1,4 @@
-# N2kMessageQueue
+# ProcessQueue
 
 Library implementing a transmit queue for NMEA 2000 messages as imlemented
 by the NMEA2000 library.
