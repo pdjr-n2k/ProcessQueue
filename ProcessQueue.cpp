@@ -1,9 +1,9 @@
 /**********************************************************************
- * N2kMessageQueue - ADT implementing an N2K message transmit queue.
+ * ProcessQueue - ADT implementing a generic process queue.
  * Copyright (C) 2022 Paul Reeve <pdjr@pdjr.eu>
  */
 
-#include "N2kMessageQueue.h"
+#include "ProcessQueue.h"
 
 template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval) {  
   this->queueSize = queueSize;

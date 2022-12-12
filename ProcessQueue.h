@@ -5,10 +5,8 @@
 
 
 
-#ifndef N2K_MESSAGE_QUEUE
-#define N2K_MESSAGE_QUEUE
-
-#include <NMEA2000.h>
+#ifndef N2K_PROCESS_QUEUE
+#define N2K_PROCESS_QUEUE
 
 template <class T> class ProcessQueue {
     public:
