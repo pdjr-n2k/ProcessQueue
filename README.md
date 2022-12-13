@@ -4,36 +4,42 @@ Library implementing an array based, fixed size, generic circular queue.
 
 ## Constants
 
-```ProcessQueue.DEFAULT_QUEUE_SIZE```
-
+```
+ProcessQueue.DEFAULT_QUEUE_SIZE
+```
 Specifies the default queue size of 10 messages.
 
-```ProcessQueue.DEFAULT_PROCESS_INTERVAL```
-
+```
+ProcessQueue.DEFAULT_PROCESS_INTERVAL
+```
 Specifies the default process interval of 50ms.
 
 ## Constructors
 
-```ProcessQueue<*type*> myQueue();```
-
+```
+ProcessQueue<*type*> myQueue();
+```
 Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
 elements of type *type* and with an automatic process interval of
 DEFAULT_PROCESS_INTERVAL.
 
-```ProcessQueue<*type*> myQueue(*size*);```
-
+```
+ProcessQueue<*type*> myQueue(*size*);
+```
 Create a new queue capable of holding a maximum of *size* elements of
 type *type* and with an automatic process interval of
 DEFAULT_PROCESS_INTERVAL.
 
-```ProcessQueue<*type*> myQueue(0, *millis*);```
-
+```
+ProcessQueue<*type*> myQueue(0, *millis*);
+```
 Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
 elements of type *type* and with an automatic process interval of
 *millis* milliseconds.
 
-```ProcessQueue<*type*> myQueue(*size*, *millis*);```
-
+```
+ProcessQueue<*type*> myQueue(*size*, *millis*);
+```
 Create a new queue capable of holding a maximum of *size* elements of
 type *type* and with an automatic process interval of *millis*
 milliseconds. 
