@@ -10,12 +10,12 @@ template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigne
   this->processInterval = processInterval;
   this->transmitFunction = 0;
 
-  this->queue = new <class T>[queueSize];
+  this->queue = new T[queueSize];
   this->front = -1;
   this->rear = -1;
 }
 
-template <class T> void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T)) {
+template <class T> void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T&)) {
   this->processFunction = processFunction;
 }
 
@@ -49,8 +49,8 @@ template <class T> void ProcessQueue<T>::dequeue() {
   }
 }
 
-template <class T> T* ProcessQueue<T>::front() {
-  T *retval = null;
+template <class T> T* ProcessQueue<T>::head() {
+  T *retval = 0;
   if (!this->isEmpty()) retval = this->queue[this->front];
   return(retval);
 }
