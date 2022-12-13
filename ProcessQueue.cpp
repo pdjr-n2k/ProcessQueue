@@ -39,10 +39,25 @@ template <class T> bool ProcessQueue<T>::enqueue(T message) {
   return(retval);
 }
 
+template <class T> void ProcessQueue<T>::dequeue() {
+  if (!this->isEmpty()) {
+    if (this->front == this->rear) {
+      this->front = this->rear = -1;
+    } else {
+      this.front = ((this.front + 1) % this->queueSize);
+    }
+  }
+}
+
+template <class T> T* ProcessQueue<T>::front() {
+  T *retval = null;
+  if (!this->isEmpty()) retval = this->queue[this->front];
+  return(retval);
+}
+
 template <class T> void ProcessQueue<T>::process(bool force) {
   static unsigned long deadline = 0UL;
   unsigned long now = millis();
-  T message;
 
   if ((now > deadline) || (force)) {
     if (!this->isEmpty()) {

@@ -21,7 +21,10 @@ template <class T> class ProcessQueue {
       bool isFull();
 
       bool enqueue(T item);
-      void process(bool force = false);
+      void dequeue();
+      T* front();
+
+      void process();
 
     private:
       int queueSize;
