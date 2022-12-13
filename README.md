@@ -1,36 +1,70 @@
 # ProcessQueue
 
-Library implementing a transmit queue for NMEA 2000 messages as imlemented
-by the NMEA2000 library.
+Library implementing an array based, fixed size, generic circular queue.
 
-A message can be added to a message queue at any time using the enqueue()
-function.
+## Constants
 
-Messages are removed from a message queue by the process() function which
-passes any message at the head of the queue to a user supplied callback
-function and removes it from the queue. Typically, the callback function
-used by process() will act to transmit the dequeued message onto the
-NMEA 2000 bus and processing interval can be specified such that the
-rate of processing can be throttled to some meaning number of milliseconds.
+```ProcessQueue.DEFAULT_QUEUE_SIZE```
+Specifies the default queue size of 10 messages.
 
-## N2kMessageQueue.DEFAULT_QUEUE_SIZE
-Specifies the default maximum queue size of 10 messages.
-
-## N2kMessageQueue.DEFAULT_PROCESS_INTERVAL
+```ProcessQueue.DEFAULT_PROCESS_INTERVAL```
 Specifies the default process interval of 50ms.
 
-## N2kMessageQueue(int queueSize = DEFAULT_QUEUE_SIZE, long processInterval = DEFAULT_PROCESS_INTERVAL);
-Create a new message queue with the specified characteristics.
+## Constructors
 
-## setProcessCallback((void *processFunction)(tN2kMsg))
+```ProcessQueue<*type*> myQueue();```
+Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
+elements of type *type* and with an automatic process interval of
+DEFAULT_PROCESS_INTERVAL.
+
+```ProcessQueue<*type*> myQueue(*size*);```
+Create a new queue capable of holding a maximum of *size* elements of
+type *type* and with an automatic process interval of
+DEFAULT_PROCESS_INTERVAL.
+
+```ProcessQueue<*type*> myQueue(0, *millis*);```
+Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
+elements of type *type* and with an automatic process interval of
+*millis* milliseconds.
+
+```ProcessQueue<*type*> myQueue(*size*, *millis*);```
+Create a new queue capable of holding a maximum of *size* elements of
+type *type* and with an automatic process interval of *millis*
+milliseconds. 
+
+## Methods
+
 ```
-N2kMessageQueue myQueue(10, 4000);
+myQueue.setProcessFunction(*function*);
+```
+If you want to automatically process the queue then you must use this
+method to specify a callback *function* which will be passed any
+available head element each time the process interval specified in the
+constructor rolls over.
 
-void loop() {
-  myQueue.process();
+```
+if myQueue.enqueue(*thing*) {
+  // Success
+} else {
+  // Failure - the queue is full
+}
+```
+Add *thing* to the end of the queue. Returns ```true``` on success, or
+```false``` if the queue is full.
+
+```
+myQueue.dequeue();
+```
+Remove any element at the front of the queue.
+
+```
+*type** element = myQueue.front()```
+N2kMessageQueue myQueue(10, 4000);```myQueue.oid loop(Functionueue.process();
 }
 
-allows the client application to add N2K messages to a
+allow```
+If you want to automatically process the queue then you must use this
+method to s the client application to add N2K messages to a
 transmission queue 
 
 
