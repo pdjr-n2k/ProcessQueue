@@ -93,9 +93,24 @@ Return a pointer to the element at the front of the queue or null if the
 queue is empty.
 
 ```
-myQueue.process(*retain*)
+bool tookAction = myQueue.process();
+bool tookAction = myQueue.process(*force*);
+bool tookAction = myQueue.process(*force*, *retain*);
 ```
-If the queue is not empty, than calls the previously registered callback
-function with a pointer to the element at the head of the queue. If
-*retain* is false or omitted, then the head element is removed from the
-queue.
+*force* and *retain* default to ```false```.
+
+The method will take no action and immediately return to the caller (with
+a return value of ```false```) if any of the following conditions pertain:
+1. no callback function has been defined;
+2. the queue is empty;
+3. the previously configured process interval has not elapsed and *force*
+   is unspecified or explicitly set ```false```. 
+
+Otherwise, the callback function will be called with a pointer to the
+element at the head of the queue as its only argument.  Subsequently, the
+head element will be removed from the queue unless *retain* is explicitly
+set ```true```. In any case, the method will return a value of ```true```.
+
+If you always intend *force*ing the execution of this method, then
+calling the constructor with *processInterval* set to 0UL might make
+sense and will eliminate the requirement to always set *force* ```true```.

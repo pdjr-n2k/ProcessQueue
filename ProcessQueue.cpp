@@ -55,17 +55,19 @@ template <class T> T* ProcessQueue<T>::front() {
   return(retval);
 }
 
-template <class T> void ProcessQueue<T>::process(bool force) {
+template <class T> void ProcessQueue<T>::process(bool force, bool retain) {
   static unsigned long deadline = 0UL;
   unsigned long now = millis();
 
   if ((now > deadline) || (force)) {
     if (!this->isEmpty()) {
       this->processFunction(this->queue[this->front]);
-      if (this->front == this->rear) {
-        this->front = this->rear = -1;
-      } else {
-        this.front = ((this.front + 1) % this->queueSize);
+      if (!retain) {
+        if (this->front == this->rear) {
+          this->front = this->rear = -1;
+        } else {
+          this.front = ((this.front + 1) % this->queueSize);
+        }
       }
     }
     deadline = (now + this->processInterval());
