@@ -2,6 +2,13 @@
 
 Library implementing an array based, fixed size, generic circular queue.
 
+The queue implementation includes a method for registering a callback
+function that can process a queue element and a process method for
+dequeing the head element and passing it to the callback. Setting a
+process interval to throttle processing to an appropriate rate and
+executing the process method from within the main program loop()
+allows automation of queue processing.
+
 ## Constants
 
 ```
@@ -47,12 +54,22 @@ milliseconds.
 ## Methods
 
 ```
+bool empty = myQueue.isEmpty();
+```
+Returns ```true``` if the queue is empty, otherwise ```false```.
+
+```
+bool full = myQueue.isFull();
+```
+Returns ```true``` if the queue is full, otherwise ```false```.
+
+```
 myQueue.setProcessFunction(*function*);
 ```
 If you want to automatically process the queue then you must use this
-method to specify a callback *function* which will be passed any
-available head element each time the process interval specified in the
-constructor rolls over.
+method to specify a callback *function* which will be passed a pointer
+to the current head element each time the process() method is invoked
+and the queue is not empty.
 
 ```
 if myQueue.enqueue(*thing*) {
@@ -67,40 +84,18 @@ Add *thing* to the end of the queue. Returns ```true``` on success, or
 ```
 myQueue.dequeue();
 ```
-Remove any element at the front of the queue.
+Remove an element at the front of the queue.
 
 ```
-*type** element = myQueue.front()```
-N2kMessageQueue myQueue(10, 4000);```myQueue.oid loop(Functionueue.process();
-}
+*type*\* element = myQueue.front()
+```
+Return a pointer to the element at the front of the queue or null if the
+queue is empty.
 
-allow```
-If you want to automatically process the queue then you must use this
-method to s the client application to add N2K messages to a
-transmission queue 
-
-
-class N2kMessageQueue {
-    public:
-      const static int DEFAULT_MAX_QUEUE_SIZE = 10;
-      const static long DEFAULT_PROCESS_INTERVAL = 4000;
-
-      N2kMessageQueue(unsigned int queueSize = N2kMessageQueue::DEFAULT_MAX_QUEUE_SIZE, unsigned long processInterval = N2kMessageQueue::DEFAULT_PROCESS_INTERVAL);
-
-      void setTransmitFunction(void (*transmitFunction)(tN2kMsg));
-
-      bool isEmpty();
-      bool isFull();
-
-      bool enqueue(tN2kMsg message);
-      void process(bool force = false);
-
-    private:
-      int queueSize;
-      unsigned long processInterval;
-      void (*transmitFunction)(tN2kMsg);
-
-      tN2kMsg* queue;
-      int front;
-      int rear;
-}
+```
+myQueue.process(*retain*)
+```
+If the queue is not empty, than calls the previously registered callback
+function with a pointer to the element at the head of the queue. If
+*retain* is false or omitted, then the head element is removed from the
+queue.
