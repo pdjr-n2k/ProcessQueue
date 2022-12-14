@@ -14,87 +14,79 @@ modules by easing the implementation of a message transmission scheme.
 
 ## Constants
 
-```
-ProcessQueue.DEFAULT_QUEUE_SIZE
-```
+### ProcessQueue.DEFAULT_QUEUE_SIZE
 Specifies the default queue size of 10 messages.
 
-```
-ProcessQueue.DEFAULT_PROCESS_INTERVAL
-```
+### ProcessQueue.DEFAULT_PROCESS_INTERVAL
 Specifies the default process interval of 50ms.
 
 ## Constructors
 
+### ProcessQueue<*type*> *processQueue*([*size*[, *processInterval*]])
 ```
-ProcessQueue<*type*> myQueue();
+ProcessQueue<N2kMsg> myQueue();
+ProcessQueue<N2kMsg> myQueue(20);
+ProcessQueue<N2kMsg> myQueue(0, 500);
+ProcessQueue<N2kMsg> myQueue(20, 500);
 ```
-Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
-elements of type *type* and with an automatic process interval of
-DEFAULT_PROCESS_INTERVAL.
+Create a new ProcessQueue called *processQueue* capable of holding
+a maximum of *size* elements of type *type* and with an automatic
+process interval of *processInterval* milliseconds.
 
-```
-ProcessQueue<*type*> myQueue(*size*);
-```
-Create a new queue capable of holding a maximum of *size* elements of
-type *type* and with an automatic process interval of
-DEFAULT_PROCESS_INTERVAL.
-
-```
-ProcessQueue<*type*> myQueue(0, *millis*);
-```
-Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
-elements of type *type* and with an automatic process interval of
-*millis* milliseconds.
-
-```
-ProcessQueue<*type*> myQueue(*size*, *millis*);
-```
-Create a new queue capable of holding a maximum of *size* elements of
-type *type* and with an automatic process interval of *millis*
-milliseconds. 
+If *processInterval* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
+is used as a default. If *size* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
+is used as a default.
 
 ## Methods
 
+### isEmpty();
 ```
 bool empty = myQueue.isEmpty();
 ```
 Returns ```true``` if the queue is empty, otherwise ```false```.
 
+### isFull();
 ```
 bool full = myQueue.isFull();
 ```
 Returns ```true``` if the queue is full, otherwise ```false```.
 
+### setProcessFunction(*function*);
 ```
-myQueue.setProcessFunction(*function*);
+void myProcessFunction(N2kMsg* msg) {
+...
+}
+
+myQueue.setProcessFunction(myProcessFunction);
 ```
 If you want to automatically process the queue then you must use this
 method to specify a callback *function* which will be passed a pointer
 to the current head element each time the process() method is invoked
 and the queue is not empty.
 
+### enqueue(*thing*)
 ```
-if myQueue.enqueue(*thing*) {
-  // Success
-} else {
-  // Failure - the queue is full
-}
+N2kMsg message;
+...
+bool success = myQueue.enqueue(message);
 ```
 Add *thing* to the end of the queue. Returns ```true``` on success, or
 ```false``` if the queue is full.
 
+### dequeue();
 ```
 myQueue.dequeue();
 ```
 Remove an element at the front of the queue.
 
+### front()
 ```
-*type*\* element = myQueue.front()
+N2kMsg* element = myQueue.front()
 ```
 Return a pointer to the element at the front of the queue or null if the
 queue is empty.
 
+### process([*force*[, *retain*]);
 ```
 bool tookAction = myQueue.process();
 bool tookAction = myQueue.process(*force*);

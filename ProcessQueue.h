@@ -8,6 +8,8 @@
 #ifndef N2K_PROCESS_QUEUE
 #define N2K_PROCESS_QUEUE
 
+#include <Arduino.h>
+
 template <class T> class ProcessQueue {
     public:
       const static int DEFAULT_QUEUE_SIZE = 10;
@@ -15,14 +17,14 @@ template <class T> class ProcessQueue {
 
       ProcessQueue(unsigned int queueSize = ProcessQueue::DEFAULT_QUEUE_SIZE, unsigned long processInterval = ProcessQueue::DEFAULT_PROCESS_INTERVAL);
 
-      void setProcessFunction(void (*processFunction)(*T));
+      void setProcessFunction(void (*processFunction)(T&));
 
       bool isEmpty();
       bool isFull();
 
       bool enqueue(T item);
       void dequeue();
-      T* front();
+      T* head();
 
       void process(bool force = false, bool retain = false);
 
