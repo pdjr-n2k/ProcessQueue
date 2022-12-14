@@ -34,7 +34,7 @@ template <class T> class ProcessQueue {
       T* queue;
       int front;
       int rear;
-}
+};
 
 #endif
 
