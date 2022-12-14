@@ -22,37 +22,20 @@ Specifies the default process interval of 50ms.
 
 ## Constructors
 
-### ProcessQueue<*type*> *processQueue*(__[__*size*[, *processInterval*]])
+### ProcessQueue<*type*> *processQueue*([*size*[, *processInterval*]])
 ```
 ProcessQueue<N2kMsg> myQueue();
-```
-Create a new ProcessQueue called *processQueue* capable of holding
-a maximum of DEFAULT_QUEUE_SIZE elements of type *type* and with an
-automatic process interval of DEFAULT_PROCESS_INTERVAL.
-
-### ProcessQueue<*type*> *processQueue*(*size*);
-```
 ProcessQueue<N2kMsg> myQueue(20);
-```
-Create a new ProcessQueue called *processQueue* capable of holding
-a maximum of *size* elements of type *type* and with an automatic
-process interval of DEFAULT_PROCESS_INTERVAL.
-
-### ProcessQueue<*type*> *processQueue*(0, *millis*);
-```
 ProcessQueue<N2kMsg> myQueue(0, 500);
-```
-Create a new ProcessQueue called *processQueue* capable of holding
-a maximum of DEFAULT_QUEUE_SIZE elements of type *type* and with an
-automatic process interval of *millis* milliseconds.
-
-### ProcessQueue<*type*> *processQueue*(*size*, *millis*);
-```
 ProcessQueue<N2kMsg> myQueue(20, 500);
 ```
 Create a new ProcessQueue called *processQueue* capable of holding
 a maximum of *size* elements of type *type* and with an automatic
-process interval of *millis* milliseconds. 
+process interval of *processInterval* milliseconds.
+
+If *processInterval* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
+is used as a default. If *size* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
+is used as a default.
 
 ## Methods
 
