@@ -22,37 +22,37 @@ Specifies the default process interval of 50ms.
 
 ## Constructors
 
-### ProcessQueue<*type*> *myQueue*()
+### ProcessQueue<*type*> *processQueue*()
 ```
 ProcessQueue<N2kMsg> myQueue();
 ```
-Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
-elements of type *type* and with an automatic process interval of
-DEFAULT_PROCESS_INTERVAL.
+Create a new ProcessQueue called *processQueue* capable of holding
+a maximum of DEFAULT_QUEUE_SIZE elements of type *type* and with an
+automatic process interval of DEFAULT_PROCESS_INTERVAL.
 
-### ProcessQueue<*type*> myQueue(*size*);
+### ProcessQueue<*type*> *processQueue*(*size*);
 ```
 ProcessQueue<N2kMsg> myQueue(20);
 ```
-Create a new queue capable of holding a maximum of *size* elements of
-type *type* and with an automatic process interval of
-DEFAULT_PROCESS_INTERVAL.
+Create a new ProcessQueue called *processQueue* capable of holding
+a maximum of *size* elements of type *type* and with an automatic
+process interval of DEFAULT_PROCESS_INTERVAL.
 
-### ProcessQueue<*type*> myQueue(0, *millis*);
+### ProcessQueue<*type*> *processQueue*(0, *millis*);
 ```
 ProcessQueue<N2kMsg> myQueue(0, 500);
 ```
-Create a new queue capable of holding a maximum of DEFAULT_QUEUE_SIZE
-elements of type *type* and with an automatic process interval of
-*millis* milliseconds.
+Create a new ProcessQueue called *processQueue* capable of holding
+a maximum of DEFAULT_QUEUE_SIZE elements of type *type* and with an
+automatic process interval of *millis* milliseconds.
 
-### ProcessQueue<*type*> myQueue(*size*, *millis*);
+### ProcessQueue<*type*> *processQueue*(*size*, *millis*);
 ```
 ProcessQueue<N2kMsg> myQueue(20, 500);
 ```
-Create a new queue capable of holding a maximum of *size* elements of
-type *type* and with an automatic process interval of *millis*
-milliseconds. 
+Create a new ProcessQueue called *processQueue* capable of holding
+a maximum of *size* elements of type *type* and with an automatic
+process interval of *millis* milliseconds. 
 
 ## Methods
 
