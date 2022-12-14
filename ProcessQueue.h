@@ -8,6 +8,8 @@
 #ifndef N2K_PROCESS_QUEUE
 #define N2K_PROCESS_QUEUE
 
+#include <Arduino.h>
+
 template <class T> class ProcessQueue {
     public:
       const static int DEFAULT_QUEUE_SIZE = 10;
