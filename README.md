@@ -22,7 +22,7 @@ Specifies the default process interval of 50ms.
 
 ## Constructors
 
-### ProcessQueue<*type*> myQueue()
+### ProcessQueue<*type*> *myQueue*()
 ```
 ProcessQueue<N2kMsg> myQueue();
 ```
