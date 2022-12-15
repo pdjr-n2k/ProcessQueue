@@ -34,8 +34,8 @@ a maximum of *size* elements of type *type* and with an automatic
 process interval of *processInterval* milliseconds.
 
 If *processInterval* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
-is used as a default. If *size* is omitted, ```ProcessQueue.DEFAULT_QUEUE_SIZE```
-is used as a default.
+is used as a default. If *size* is omitted (or set to zero)
+```ProcessQueue.DEFAULT_QUEUE_SIZE``` is used as a default.
 
 ## Methods
 
