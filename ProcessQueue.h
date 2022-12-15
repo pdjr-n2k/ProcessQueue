@@ -1,5 +1,5 @@
 /**********************************************************************
- * ProcessQueue.h - ADT implementing a generic processing queue.
+ * ProcessQueue.h - ADT implementing a generic static queue.
  * Copyright (C) 2022 Paul Reeve <pdjr@pdjr.eu>
  */
 

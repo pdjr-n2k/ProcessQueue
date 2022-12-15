@@ -1,12 +1,12 @@
 /**********************************************************************
- * ProcessQueue - ADT implementing a generic process queue.
+ * ProcessQueue - ADT implementing a generic static queue.
  * Copyright (C) 2022 Paul Reeve <pdjr@pdjr.eu>
  */
 
 #include "ProcessQueue.h"
 
 template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval) {  
-  this->queueSize = queueSize;
+  this->queueSize = (queueSize == 0)?ProcessQueue::DEFAULT_QUEUE_SIZE:queueSize;
   this->processInterval = processInterval;
   this->transmitFunction = 0;
 
