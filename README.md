@@ -6,8 +6,8 @@ The queue implementation includes a method for registering a callback
 function that can process a queue element and a process method for
 passing the queue's head element to the callback and, perhaps, then
 dequeueing it. Setting a process interval to throttle processing at an
-appropriate rate and allows the process method to be executed from the
-main program loop() in a resource sensitive way.
+appropriate rate allows the process method to be executed from the main
+program loop() in a resource sensitive way.
 
 The library was written to support the development of firmware for N2K
 modules by easing the implementation of a message transmission scheme. 
