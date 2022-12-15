@@ -1,6 +1,6 @@
 # ProcessQueue
 
-Library implementing an array based, fixed size, generic circular queue.
+ADT implementing an array based, fixed size, generic circular queue.
 
 The queue implementation includes a method for registering a callback
 function that can process a queue element and a process method for
