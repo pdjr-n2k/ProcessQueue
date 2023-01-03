@@ -6,9 +6,8 @@
 #ifndef PROCESS_QUEUE
 #define PROCESS_QUEUE
 
-#include <Arduino.h>
-
-template <class T> class ProcessQueue {
+template <typename T>
+class ProcessQueue {
     public:
       const static int DEFAULT_QUEUE_SIZE = 10;
       const static long DEFAULT_PROCESS_INTERVAL = 4000;

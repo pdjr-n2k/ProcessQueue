@@ -3,9 +3,11 @@
  * Copyright (C) 2022 Paul Reeve <pdjr@pdjr.eu>
  */
 
+#include <Arduino.h>
 #include "ProcessQueue.h"
 
-template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval, void (*processFunction)(T)) {  
+template <typename T>
+ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval, void (*processFunction)(T)) {  
   this->queueSize = (queueSize == 0)?ProcessQueue::DEFAULT_QUEUE_SIZE:queueSize;
   this->processInterval = processInterval;
   this->processFunction = processFunction;
@@ -15,19 +17,23 @@ template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigne
   this->rear = -1;
 }
 
-template <class T> void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T)) {
+template <typename T>
+void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T)) {
   this->processFunction = processFunction;
 }
 
-template <class T> bool ProcessQueue<T>::isEmpty() {
+template <typename T>
+bool ProcessQueue<T>::isEmpty() {
   return((this->front == -1) && (this->rear == -1));
 }
 
-template <class T> bool ProcessQueue<T>::isFull() {
+template <typename T>
+bool ProcessQueue<T>::isFull() {
   return(((this->rear + 1) % this->queueSize) == this->front);
 }
 
-template <class T> bool ProcessQueue<T>::enqueue(T item) {
+template <typename T>
+bool ProcessQueue<T>::enqueue(T item) {
   bool retval = false;
 
   if (!this->isFull()) {
@@ -39,23 +45,24 @@ template <class T> bool ProcessQueue<T>::enqueue(T item) {
   return(retval);
 }
 
-template <class T> void ProcessQueue<T>::dequeue() {
+template <typename T>
+void ProcessQueue<T>::dequeue() {
   if (!this->isEmpty()) {
     if (this->front == this->rear) {
       this->front = this->rear = -1;
     } else {
-      this.front = ((this.front + 1) % this->queueSize);
+      this->front = ((this->front + 1) % this->queueSize);
     }
   }
 }
 
-template <class T> T ProcessQueue<T>::head() {
-  T retval = 0;
-  if (!this->isEmpty()) retval = this->queue[this->front];
-  return(retval);
+template <typename T>
+T ProcessQueue<T>::head() {
+  return(this->queue[this->front]);
 }
 
-template <class T> void ProcessQueue<T>::process(bool force, bool retain) {
+template <typename T>
+void ProcessQueue<T>::process(bool force, bool retain) {
   static unsigned long deadline = 0UL;
   unsigned long now = millis();
 
@@ -66,11 +73,11 @@ template <class T> void ProcessQueue<T>::process(bool force, bool retain) {
         if (this->front == this->rear) {
           this->front = this->rear = -1;
         } else {
-          this.front = ((this.front + 1) % this->queueSize);
+          this->front = ((this->front + 1) % this->queueSize);
         }
       }
     }
-    deadline = (now + this->processInterval());
+    deadline = (now + this->processInterval);
   }
 }
  
