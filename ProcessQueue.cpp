@@ -83,7 +83,7 @@ void ProcessQueue<T>::process(bool force, bool retain) {
 
   if ((now > deadline) || (force)) {
     if (!this->isEmpty()) {
-      this->processFunction(this->queue[this->front]);
+      this->processFunction(this->head());
       if (!retain) {
         if (this->front == this->rear) {
           this->front = this->rear = -1;
