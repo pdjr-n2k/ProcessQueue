@@ -5,17 +5,17 @@
 
 #include "ProcessQueue.h"
 
-template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval) {  
+template <class T> ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInterval, void (*processFunction)(T)) {  
   this->queueSize = (queueSize == 0)?ProcessQueue::DEFAULT_QUEUE_SIZE:queueSize;
   this->processInterval = processInterval;
-  this->transmitFunction = 0;
+  this->processFunction = processFunction;
 
   this->queue = new T[queueSize];
   this->front = -1;
   this->rear = -1;
 }
 
-template <class T> void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T&)) {
+template <class T> void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T)) {
   this->processFunction = processFunction;
 }
 
@@ -27,13 +27,13 @@ template <class T> bool ProcessQueue<T>::isFull() {
   return(((this->rear + 1) % this->queueSize) == this->front);
 }
 
-template <class T> bool ProcessQueue<T>::enqueue(T message) {
+template <class T> bool ProcessQueue<T>::enqueue(T item) {
   bool retval = false;
 
   if (!this->isFull()) {
     if (this->front == -1) this->front = 0;
     this->rear = ((this->rear + 1) % this->queueSize);
-    this->queue[this->rear] = message;
+    this->queue[this->rear] = item;
     retval = true;
   }
   return(retval);
@@ -49,8 +49,8 @@ template <class T> void ProcessQueue<T>::dequeue() {
   }
 }
 
-template <class T> T* ProcessQueue<T>::head() {
-  T *retval = 0;
+template <class T> T ProcessQueue<T>::head() {
+  T retval = 0;
   if (!this->isEmpty()) retval = this->queue[this->front];
   return(retval);
 }
