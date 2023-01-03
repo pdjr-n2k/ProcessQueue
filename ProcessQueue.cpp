@@ -18,8 +18,23 @@ ProcessQueue<T>::ProcessQueue(unsigned int queueSize, unsigned long processInter
 }
 
 template <typename T>
+void ProcessQueue<T>::setProcessInterval(unsigned long millis) {
+  this->processInterval = processInterval;
+}
+
+template <typename T>
 void ProcessQueue<T>::setProcessFunction(void (*processFunction)(T)) {
   this->processFunction = processFunction;
+}
+
+template <typename T>
+unsigned int ProcessQueue<T>::getQueueSize() {
+  return(this->queueSize);
+}
+
+template <typename T>
+unsigned long ProcessQueue<T>::getProcessInterval() {
+  return(this->processInterval);
 }
 
 template <typename T>
